@@ -52,7 +52,6 @@ class ArtNetDevice(NetworkedDevice):
             self._config["pixel_count"] * 3  # 4 for RGBW devices
         )
         self.packet_size = self._config["packet_size"]
-        self.sequence = 0
         self.universe_count = (
             self.channel_count + self.packet_size - 1
         ) // self.packet_size
@@ -66,7 +65,6 @@ class ArtNetDevice(NetworkedDevice):
             target_ip=self._config["ip_address"],
             universe=self._config["universe"],
             packet_size=self.packet_size,
-            sequence=0,
             fps=self._config["refresh_rate"],
             even_packet_size=self._config["even_packet_size"],
             broadcast=False,
@@ -103,4 +101,5 @@ class ArtNetDevice(NetworkedDevice):
             ]
             self._artnet.set_universe(i + self._config["universe"])
             self._artnet.set(packet)
+            self._artnet.sequence = 0
             self._artnet.show()
