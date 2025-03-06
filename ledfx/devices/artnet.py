@@ -110,7 +110,6 @@ class ArtNetDevice(NetworkedDevice):
             packet_size=self.packet_size,
             fps=self._config["refresh_rate"],
             even_packet_size=self._config["even_packet_size"],
-            sequence=0,
             broadcast=False,
         )
         # Don't use start for stupidArtnet - we handle fps locally, and it spawns hundreds of threads
